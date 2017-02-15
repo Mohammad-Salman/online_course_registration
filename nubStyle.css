@@ -1,0 +1,93 @@
+/* responsive layout of container and sidebar */
+nav.sidebar{margin: 17% 0; float: left; width: 100%;}
+#content-container{width: 100%; float: left; margin-top: 15%;}
+@media only screen and (min-width: 426px) {
+  nav.sidebar{width: 82%; margin: 11% 9%;}
+  #content-container{margin-top: 0%;}
+}
+@media only screen and (min-width: 769px) {
+  nav.sidebar{width: 25%; margin: 5% 0;}
+  #content-container{width: 75%;}
+}
+
+/* hide large, medium, small */
+.hide-small{display: none;}
+.show-small{display: block;}
+@media only screen and (min-width: 426px) {
+  .hide-medium{display: none;}
+  .show-medium{display: block;}
+}
+@media only screen and (min-width: 769px) {
+  .hide-large{display: none;}
+  .show-large{display: block;}
+}
+
+/* Create a Parallax Effect */
+.bgimg-paralex{
+    opacity: 0.;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Home page paralex background image */
+.bgimg-home {
+    background-image: url('nub_web_images/RoussanouMonastery_1920x1200.jpg');
+    background-size: 100% 100%;
+}
+/* Turn off parallax scrolling for tablets and mobiles */
+@media only screen and (max-width: 769px) {
+    .bgimg-home {
+        background-attachment: scroll;
+    }
+}
+
+/* a background color of youtube-hover */
+a.youtube-hover:hover{color: rgb(200,24,21);}
+
+/* a navigaton list decoration */
+li a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+/* a card-16 type shadow when it is hovered */
+.hover-shadow-16{
+	-webkit-transition-duration: 0.5s; /* Safari */
+    transition-duration: 0.7s;
+}
+.hover-shadow-16:hover {
+	box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.23), 0 25px 49px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* responsive page columns width */
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+[class*="col-"] {
+    float: left;
+    /*padding: 15px;*/
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+.auto-margin{margin: 0 auto;}
+
+.button-top-margin{margin: 25px 0;}
