@@ -127,7 +127,7 @@ if ($_SESSION["nub-login-check"] != "yes") {
 
 		<!--right side navigation panel-->
 		<?php require 'side_navigation.php';?>
-		
+
 	</div> <!-- containar of contents section ends-->
 
 	<!--pagination added-->
@@ -312,63 +312,46 @@ if ($_SESSION["nub-login-check"] != "yes") {
 		$student_id= $_SESSION['nub-login-id']; // get student id
 
 		/*--   get timeline from database   --*/
-		$sqlDate = "SELECT reg_start, reg_end, result_publish, reg_confirm, reg_semester FROM timeline";
-		$resultDate = $conn->query($sqlDate);
+		require 'fetch_all.php';
+		$date= date("Y-m-d");
 
-		if ($resultDate->num_rows > 0) {
-			/*-- output data of each row --*/
-			while($row = $resultDate->fetch_assoc()) {
+		/*--  set semester name on page   --*/
+		echo "<script>
+						document.getElementById('sem-name').innerHTML= '$timeline_sem';
+						if('$date' <= '$reg_end'){
+							document.getElementById('reg-time-section').style.display= 'block';
+							document.getElementById('reg-time-section').innerHTML= 'Registration time: '+'( '+'$reg_start' + ' ) to ( ' + '$reg_end'+ ' )';
+						}else if('$date' <= '$reg_confirm_date'){
+							document.getElementById('reg-time-section').style.display= 'block';
+							document.getElementById('reg-time-section').innerHTML= 'Resistration confirm last date: '+'( '+'$reg_confirm_date' + ' )';
+						}else if('$date' > '$reg_confirm_date'){
+							document.getElementById('reg-time-section').style.display= 'none';
+						}
+					</script>";
 
-				/*-- copy registered courses from array to varriable to use them is javascript --*/
-				$regStart= $row['reg_start']; $regEnd= $row['reg_end']; $resultPublish= $row['result_publish'];
-				$regSemester= $row['reg_semester']; $regCon= $row['reg_confirm'];
-				$date= date("Y-m-d");
-				/*--  set semester nmae on page   --*/
-				echo "<script>
-								document.getElementById('sem-name').innerHTML= '$regSemester';
-								if('$date' <= '$regEnd'){
-									document.getElementById('reg-time-section').style.display= 'block';
-									document.getElementById('reg-time-section').innerHTML= 'Registration time: '+'( '+'$regStart' + ' ) to ( ' + '$regEnd'+ ' )';
-								}else if('$date' <= '$regCon'){
-									document.getElementById('reg-time-section').style.display= 'block';
-									document.getElementById('reg-time-section').innerHTML= 'Resistration confirm last date: '+'( '+'$regCon' + ' )';
-								}else if('$date' > '$regCon'){
-									document.getElementById('reg-time-section').style.display= 'none';
-								}
-
-							</script>";
-			}
-		}
-
-		/*--   get registered courses from database   --*/
-		$sqlRegCourses = "SELECT s_id, c_id, c_name, c_credit, status FROM reg_semester WHERE (status= 'pending' OR status= 'reg') AND s_id='" . $student_id . "'";
-		$resultRegCourses = $conn->query($sqlRegCourses);
-
-		if ($resultRegCourses->num_rows > 0) {
+		/*--   if reg time is not expired, get registered courses from database & display   --*/
+		if ($resultRegSemester->num_rows > 0) {
 				$rowCount= 0; $totalCredit= 0; $pending= 0;
 
 				/*-- output data of each row --*/
-				while($row = $resultRegCourses->fetch_assoc()) {
+				for($i= 0; $i< $resultRegSemester->num_rows; $i++) {
 
 					/*-- check if there is pending --*/
-					$status= $row['status'];
-					if($status == "pending")
+					if($rowRegSemester[$i]['status'] == "pending")
 						$pending++;
 				}
 
-				/*--   get only "pending" courses & display   --*/
-				if (date("Y-m-d") <= $resultPublish && ($pending != 0)) {
-					/*--   get registered courses from database   --*/
-					$sqlRegCourses = "SELECT s_id, c_id, c_name, c_credit, status FROM reg_semester WHERE (status= 'pending' OR status= 'reg') AND s_id='" . $student_id . "'";
-					$resultRegCourses = $conn->query($sqlRegCourses);
-
+				/*--   get only "pending" courses & display : if reg time exists but reg is done   --*/
+				if ($date <= $result_publish && ($pending != 0)) {
 					$rowCount= 0; $totalCredit= 0;
 
 					/*-- output data of each row --*/
-					while($row1 = $resultRegCourses->fetch_assoc()) {
+					for($i= 0; $i< $resultRegSemester->num_rows; $i++) {
 
 						/*-- copy registered courses from array to varriable to use them is javascript --*/
-					  $cId= $row1['c_id']; $cName= $row1['c_name']; $cCredit= $row1['c_credit']; $status= $row1['status']; $sId= $row1['s_id'];
+					  $cId= $rowRegSemester[$i]['c_id']; $cName= $rowRegSemester[$i]['c_name']; $cCredit= $rowRegSemester[$i]['c_credit'];
+						$status= $rowRegSemester[$i]['status']; $sId= $rowRegSemester[$i]['s_id'];
+
 						if($status == "pending"){
 							/*-- add total credit --*/
 							$totalCredit= $totalCredit+$cCredit;
@@ -385,20 +368,20 @@ if ($_SESSION["nub-login-check"] != "yes") {
 									disable();
 									document.getElementById('total-credit').innerHTML= '$totalCredit';
 								</script>";
-				}else if(date("Y-m-d") > $resultPublish){   /*--  get "reg" or "pending" courses  --*/
-					/*--   get registered courses from database   --*/
-					$sqlRegCourses = "SELECT s_id, c_id, c_name, c_credit, status FROM reg_semester WHERE (status= 'pending' OR status= 'reg') AND s_id='" . $student_id . "'";
-					$resultRegCourses = $conn->query($sqlRegCourses);
+				}else if($date > $result_publish){   /*--  get "reg" or "pending" courses : if reg time is over  --*/
 
 					$rowCount= 0; $totalCredit= 0;
 
 					/*-- output data of each row --*/
-					while($row = $resultRegCourses->fetch_assoc()) {
+					for($i= 0; $i< $resultRegSemester->num_rows; $i++) {
 
 						/*-- copy registered courses from array to varriable to use them is javascript --*/
-					  $cId= $row['c_id']; $cName= $row['c_name']; $cCredit= $row['c_credit']; $status= $row['status']; $sId= $row['s_id'];
+					  $cId= $rowRegSemester[$i]['c_id']; $cName= $rowRegSemester[$i]['c_name']; $cCredit= $rowRegSemester[$i]['c_credit'];
+						$status= $rowRegSemester[$i]['status']; $sId= $rowRegSemester[$i]['s_id'];
+
 						if($status == "reg")$status= "Registered";
 						else $status= "Pending";
+
 						/*-- add total credit --*/
 						$totalCredit= $totalCredit+$cCredit;
 
@@ -414,13 +397,13 @@ if ($_SESSION["nub-login-check"] != "yes") {
 									document.getElementById('total-credit').innerHTML= '$totalCredit';
 								</script>";
 				}
-		}else if(date("Y-m-d") > $regCon){
-			echo "<script>document.getElementById('reg-status').innerHTML= 'Registration has been canceled!';
+		}else if($date > $reg_confirm_date){
+			echo "<script>
 							disable();
 							document.getElementById('table-section').style.display= 'none';
 							document.getElementById('reg-status').innerHTML= 'Registration has been canceled!';
 						</script>";
-		}else if(date("Y-m-d") > $regEnd){
+		}else if($date > $reg_end){
 			echo "<script>
 							disable();
 							document.getElementById('table-section').style.display= 'none';
@@ -428,33 +411,26 @@ if ($_SESSION["nub-login-check"] != "yes") {
 						</script>";
 		}
 
-		/*--   get offered courses from database   --*/
-		$sqlOffCourses = "SELECT c_id, c_name, c_credit, section FROM offered_courses";
-		$resultOffCourses = $conn->query($sqlOffCourses);
-
-		/*--   get total registration of particular course   --
-		$sqlTotalReg = "SELECT * FROM reg_semester WHERE c_id= ''";
-		$resultTotalReg = $conn->query($sqlTotalReg);*/
+		/*--   get offered courses from database & add to dropdown box   --*/
 
 		if ($resultOffCourses->num_rows > 0) {
 				/*-- output data of each row --*/
-				while($rowOffCourses = $resultOffCourses->fetch_assoc()) {
+				for($i= 0; $i< $resultOffCourses->num_rows; $i++) {
 
 					/*-- copy offered courses from array to vaiable to use them in javascript --*/
-					$ocId= $rowOffCourses['c_id']; $ocName= $rowOffCourses['c_name']; $ocCredit= $rowOffCourses['c_credit']; $osection= $rowOffCourses['section'];
+					$ocId= $rowOffCourses[$i]['c_id']; $ocName= $rowOffCourses[$i]['c_name']; $ocCredit= $rowOffCourses[$i]['c_credit'];
+					$osection= $rowOffCourses[$i]['section'];
+
 					/*-- add options to dropdownbox --*/
 					echo "<script>
 									/*-- add options to dropdown-box --*/
 									var select= document.getElementById('dropdown-option');
 									var option= document.createElement('option');
-									option.text= 'Code: '+'[$ocId] >>'+'Course name: '+'[$ocName] >>'+'Credit: '+'[$ocCredit] >>'+'Section: '+'[$osection]';
+									option.text= 'Code: '+'[$ocId] >>'+'Course name: '+'[$ocName] >>'+'Credit: '+'[$ocCredit] >>'+
+																'Section: '+'[$osection]';
 									select.add(option);
 								</script>";
 				}
-		}
-
-		function test(){
-			echo "string";
 		}
 
 		$conn->close();

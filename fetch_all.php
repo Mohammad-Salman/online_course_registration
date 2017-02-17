@@ -1,8 +1,6 @@
 <?php
   /*--   this file select rows from all database tables   --*/
 
-  session_start();
-
   /*-- connect to database --*/
   $servername = "localhost";
   $username = "root";
@@ -100,7 +98,7 @@
       // get data in variable
       while($rowTimeline = $resultTimeline->fetch_assoc()) {
           $reg_start= $rowTimeline["reg_start"]; $reg_end= $rowTimeline["reg_end"]; $result_publish= $rowTimeline["result_publish"];
-          $reg_confirm= $rowTimeline["reg_confirm"]; $timeline_sem= $rowTimeline["reg_semester"];
+          $reg_confirm_date= $rowTimeline["reg_confirm"]; $timeline_sem= $rowTimeline["reg_semester"];
       }
   }
 
