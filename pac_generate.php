@@ -240,15 +240,15 @@ if(month > 8){
 	}
 
 	/*--   get offered courses from database   --*/
-	$sqlOffCourses = "SELECT c_id, c_name, c_credit, section FROM offered_courses";
-	$resultOffCourses = $conn->query($sqlOffCourses);
+	require 'fetch_all.php';
 
-	if ($resultOffCourses->num_rows > 0) {
+	if ($resultRegSemester->num_rows > 0) {
 			/*-- output data of each row --*/
-			while($rowOffCourses = $resultOffCourses->fetch_assoc()) {
+			for($i= 0; $i< $resultRegSemester->num_rows; $i++) {
 
 				/*-- copy offered courses from array to vaiable to use them in javascript --*/
-				$ocId= $rowOffCourses['c_id']; $ocName= $rowOffCourses['c_name']; $ocCredit= $rowOffCourses['c_credit']; $osection= $rowOffCourses['section'];
+				$ocId= $rowOffCourses[$i]['c_id']; $ocName= $rowOffCourses[$i]['c_name']; $ocCredit= $rowOffCourses[$i]['c_credit'];
+				$osection= $rowOffCourses[$i]['section'];
 				/*-- add options to dropdownbox --*/
 				echo "<script>
 								/*-- add options to dropdown-box --*/
