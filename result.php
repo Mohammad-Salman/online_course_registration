@@ -222,13 +222,13 @@ if ($_SESSION["nub-login-check"] != "yes") {
 	/*--   get total completed credit hours from database   --*/
 	require 'fetch_all.php';
 
-	if ($resultComCourse->num_rows > 0) {
+	if ($resultId->num_rows > 0) {
 			$totalCompCredit= 0;
 
 			/*-- output data of each row --*/
-			while($rowComCourse = $resultComCourse->fetch_assoc()){
+			for($i= 0; $i< $resultId->num_rows; $i++){
 
-				$comCredit= $rowComCourse["c_credit"];
+				$comCredit= $rowId[$i]["c_credit"];
 				$totalCompCredit+= (int)$comCredit;
 			}
 			echo "<script>
