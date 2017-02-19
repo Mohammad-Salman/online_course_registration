@@ -14,13 +14,11 @@
 
   // get teacher id
   $tId= $_SESSION['nub-login-id'];
-  
+
   /*--   get "t_name" from teachers database   --*/
   require 'fetch_all.php';
 
   /*--   get student t_id and c_id from teachers registered courses from database   --*/
-  $sqlCode = "SELECT t_name, c_id FROM teac_registration WHERE c_id= '$q'";
-  $resultCode = $conn->query($sqlCode);
   $author= 0;
 
   if ($resultCode->num_rows > 0) {
