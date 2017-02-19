@@ -173,11 +173,11 @@ if ($_SESSION["nub-login-check"] != "yes" && $_SESSION["nub-admin-login-check"] 
 				if ($resultStudent->num_rows > 0 && $resultTeacher->num_rows > 0 && $resultAdmin->num_rows > 0) {
 
 					if ($profession == 'student') {
-						$name= $row2["s_name"]; $department= $row2["s_department"];
+						$name= $s_name; $department= $s_department;
 					}elseif ($profession == 'teacher') {
-						$name= $row2["t_name"]; $department= $row2["t_department"];
+						$name= $t_name; $department= $t_department;
 					}elseif ($profession == 'administrator') {
-						$name= $row2["admin_name"];
+						$name= $admin_name;
 					}
 
 					echo "<script>
