@@ -168,8 +168,6 @@ if ($_SESSION["nub-login-check"] != "yes" && $_SESSION["nub-admin-login-check"] 
 
 			/*-- output data of each row --*/
 			if($rowProfile){
-				$profession= $row["profession"];$gender= $row["gender"]; $contact= $row["contact"];
-				$email= $row["email"]; $address= $row["address"]; $password= $row['password']; $department= "";
 
 				/*--   get profile from student, teacher or administrator table   --*/
 				if($profession == 'student'){
