@@ -170,18 +170,7 @@ if ($_SESSION["nub-login-check"] != "yes" && $_SESSION["nub-admin-login-check"] 
 			if($rowProfile){
 
 				/*--   get profile from student, teacher or administrator table   --*/
-				if($profession == 'student'){
-					$sql2= "SELECT s_name, s_department FROM student WHERE s_id= '$student'";
-				}elseif ($profession == 'teacher') {
-					$sql2= "SELECT t_name, t_department FROM teacher WHERE t_id= '$student'";
-				}elseif ($profession == 'administrator') {
-					$sql2= "SELECT admin_name FROM administrator WHERE admin_id= '$student'";
-				}
-
-				$result2= $conn->query($sql2);
-
-				if ($result2->num_rows > 0) {
-					$row2 = $result2->fetch_assoc();
+				if ($resultStudent->num_rows > 0 && $resultTeacher->num_rows > 0 && $resultAdmin->num_rows > 0) {
 
 					if ($profession == 'student') {
 						$name= $row2["s_name"]; $department= $row2["s_department"];
