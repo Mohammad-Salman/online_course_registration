@@ -199,6 +199,7 @@ if ($_SESSION["nub-login-check"] != "yes" && $_SESSION["nub-admin-login-check"] 
 			}
 	}
 
+	/*--   change side_navigation of profile page   --*/
 	echo "<script>
 					/*--   change link of sidenav is 'student'   --*/
 					if ('$profession' == 'student') {
