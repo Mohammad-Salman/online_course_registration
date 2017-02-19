@@ -2,17 +2,7 @@
   /*--   this file select rows from all database tables   --*/
 
   /*-- connect to database --*/
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "online_registration";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
+  require 'connect_database.php';
 
   /*--   get login id   --*/
   if($_SESSION["nub-admin-login-check"]== "no")

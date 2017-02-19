@@ -23,13 +23,6 @@
     echo json_encode($outp);
   }else echo $code;
 
-  /*--   get total number of registration of perticular course from database   --*/
-  /*$sqlOffCourses = "SELECT c_id, c_name, c_credit, section FROM reg_semester";
-  $resultOffCourses = $conn->query($sqlOffCourses);
-
-  if ($resultOffCourses->num_rows > 0) {
-      $outp = "[";*/
-
 
   $conn->close();
 ?>
