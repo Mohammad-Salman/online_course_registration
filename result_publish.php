@@ -221,8 +221,7 @@ if ($_SESSION["nub-admin-login-check"] != "yes") {
 	}
 
 	/*--   get timeline from database   --*/
-	$sqlDate = "SELECT reg_start, reg_end, result_publish, reg_confirm, reg_semester FROM timeline";
-	$resultDate = $conn->query($sqlDate);
+	require 'fetch_all.php';
 
 	if ($resultDate->num_rows > 0) {
 		/*-- output data of each row --*/
