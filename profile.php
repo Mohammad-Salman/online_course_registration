@@ -162,14 +162,12 @@ if ($_SESSION["nub-login-check"] != "yes" && $_SESSION["nub-admin-login-check"] 
 	}else $student = $_SESSION["nub-admin-login-id"];
 
 	/*--   get profile from profile table   --*/
-	$sql1= "SELECT gender, contact, email, address, password, profession FROM profile WHERE user_id= '$student'";
-	$result1= $conn->query($sql1);
+	require 'fetch_all.php';
 
-	if ($result1->num_rows > 0) {
-			$row = $result1->fetch_assoc();
+	if ($resultProfile->num_rows > 0) {
 
 			/*-- output data of each row --*/
-			if($row){
+			if($rowProfile){
 				$profession= $row["profession"];$gender= $row["gender"]; $contact= $row["contact"];
 				$email= $row["email"]; $address= $row["address"]; $password= $row['password']; $department= "";
 
