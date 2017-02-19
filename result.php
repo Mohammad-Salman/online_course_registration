@@ -228,8 +228,10 @@ if ($_SESSION["nub-login-check"] != "yes") {
 			/*-- output data of each row --*/
 			for($i= 0; $i< $resultId->num_rows; $i++){
 
-				$comCredit= $rowId[$i]["c_credit"];
-				$totalCompCredit+= (int)$comCredit;
+				if ($rowId[$i]["g_point"] != 'F' && $rowId[$i]["g_point"] != 'X') {
+					$comCredit= $rowId[$i]["c_credit"];
+					$totalCompCredit+= (int)$comCredit;
+				}
 			}
 			echo "<script>
 							document.getElementById('credit-complete').innerHTML= '$totalCompCredit' ;
