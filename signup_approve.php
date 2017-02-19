@@ -245,7 +245,7 @@ if ($_SESSION["nub-admin-login-check"] != "yes") {
 	require 'connect_database.php';
 
 	/*--   get unverified signup list from database   --*/
-	
+	require 'fetch_all.php';
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
