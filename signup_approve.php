@@ -247,11 +247,11 @@ if ($_SESSION["nub-admin-login-check"] != "yes") {
 	/*--   get unverified signup list from database   --*/
 	require 'fetch_all.php';
 
-	if ($result->num_rows > 0) {
+	if ($resultVerify->num_rows > 0) {
 	    // output data of each row
-	    while($row = $result->fetch_assoc()) {
+	    for($i= 0; $i< $resultVerify->num_rows; $i++) {
 
-				$id= $row['user_id']; $name= $row['name']; $department= $row['department']; $batch= $row['batch'];
+				$id= $rowVerify[$i]['user_id']; $name= $row['name']; $department= $row['department']; $batch= $row['batch'];
 				$joinDate= $row['joining_date']; $profession= $row['profession'];
 
 				/*--   add row to sign-up list   --*/
