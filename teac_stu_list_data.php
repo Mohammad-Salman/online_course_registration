@@ -21,10 +21,9 @@
   /*--   get student t_id and c_id from teachers registered courses from database   --*/
   $author= 0;
 
-  if ($resultCode->num_rows > 0) {
-    /*-- output data of each row --*/
-    while($rowCode = $resultCode->fetch_assoc()) {
-      if($rowCode['t_name'] == $t_name){
+  if ($resultTeacReg->num_rows > 0) {
+    for($i= 0; $i< $resultTeacReg->num_rows; $i++) {
+      if($rowTeacReg[$i]['c_id'] == $q){
         $author= 1;
       }
     }
