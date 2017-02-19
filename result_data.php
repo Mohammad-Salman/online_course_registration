@@ -14,11 +14,9 @@
   /*--   get result from student database   --*/
   require 'fetch_all.php';
 
-  if ($resultSemRes->num_rows > 0) {
+  if ($resultId->num_rows > 0) {
     /*-- output data of each row --*/
-    $outp = array();
-    $outp= $resultSemRes->fetch_all(MYSQLI_ASSOC);
-    echo json_encode($outp);
+    echo json_encode($rowId);
   }
 
 
