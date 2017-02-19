@@ -1,8 +1,8 @@
 <?php
   /*--   this file select rows from all database tables   --*/
 
-  session_start();
-  
+  //session_start();
+
   /*-- connect to database --*/
   require 'connect_database.php';
 
@@ -107,17 +107,15 @@
       }
   }
 
-  /*--   fetch 'teac_resistration' table/fetch_assoc   --*/
+  /*--   fetch 'teac_resistration' table/fetch_all   --*/
 
   $sqlTeacReg = "SELECT * FROM teac_registration WHERE t_name IN (SELECT t_name FROM teacher WHERE t_id= '$id')";
   $resultTeacReg = $conn->query($sqlTeacReg);
 
   if ($resultTeacReg->num_rows > 0) {
       // get data in variable
-      while($rowTeacReg = $resultTeacReg->fetch_assoc()) {
-        $teac_reg_t_name= $rowTeacReg["t_name"]; $teac_reg_c_id= $rowTeacReg["c_id"]; $teac_reg_semester= $rowTeacReg["semester"];
-      }
-  } echo $teac_reg_t_name;
+      $rowTeacReg = $resultTeacReg->fetch_all(MYSQLI_ASSOC);
+  }
 
   /*--   fetch 'verify_sign_up' table/fetch_all   --*/
 
