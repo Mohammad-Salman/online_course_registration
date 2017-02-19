@@ -14,15 +14,9 @@
 
   // get teacher id
   $tId= $_SESSION['nub-login-id'];
+  
   /*--   get "t_name" from teachers database   --*/
   require 'fetch_all.php';
-
-  if ($resulTName->num_rows > 0) {
-    /*-- output data of each row --*/
-    while($rowTName = $resulTName->fetch_assoc()) {
-      $tName= $rowTName['t_name'];
-    }
-  }
 
   /*--   get student t_id and c_id from teachers registered courses from database   --*/
   $sqlCode = "SELECT t_name, c_id FROM teac_registration WHERE c_id= '$q'";
@@ -32,7 +26,7 @@
   if ($resultCode->num_rows > 0) {
     /*-- output data of each row --*/
     while($rowCode = $resultCode->fetch_assoc()) {
-      if($rowCode['t_name'] == $tName){
+      if($rowCode['t_name'] == $t_name){
         $author= 1;
       }
     }
