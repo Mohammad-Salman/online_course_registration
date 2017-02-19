@@ -15,8 +15,8 @@
   // get teacher id
   $tId= $_SESSION['nub-login-id'];
   /*--   get "t_name" from teachers database   --*/
-  $sqlTName = "SELECT t_name FROM teacher WHERE t_id= '$tId'";
-  $resulTName = $conn->query($sqlTName);
+  
+
   if ($resulTName->num_rows > 0) {
     /*-- output data of each row --*/
     while($rowTName = $resulTName->fetch_assoc()) {
