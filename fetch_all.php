@@ -35,6 +35,19 @@
       }
   }
 
+  /*--   fetch 'administrator' table/fetch_assoc   --*/
+
+  $sqlAdmin = "SELECT * FROM administrator WHERE admin_id= '$id'";
+  $resultAdmin = $conn->query($sqlAdmin);
+
+  if ($resultAdmin->num_rows > 0) {
+      // get data in variable
+      while($rowAdmin = $resultAdmin->fetch_assoc()) {
+          $admin_id= $rowAdmin["admin_id"];
+          $admin_name= $rowAdmin["admin_name"]; $admin_joining_date= $rowAdmin["joining_date"];
+      }
+  }
+
   /*--   fetch 'profile' table/fetch_assoc   --*/
 
   $sqlProfile = "SELECT * FROM profile WHERE user_id= '$id'";
