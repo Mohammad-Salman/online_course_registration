@@ -20,8 +20,7 @@
     if ($conn->query($sql) === TRUE) {
 
       /*--   get data from 'verify_sign_up' database table   --*/
-      $sqlGet = "SELECT name, department, batch, joining_date,
-                  contact, email, password, address, gender, profession FROM verify_sign_up WHERE user_id= '$insert[0]' AND status='verified'";
+      $sqlGet = "SELECT * FROM verify_sign_up WHERE user_id= '$insert[0]' AND status='verified'";
       $result= $conn->query($sqlGet);
       $row = mysqli_fetch_all($result,MYSQLI_ASSOC);
       $id= $insert[0]; $name= $row[0]['name']; $department= $row[0]['department']; $batch= $row[0]['batch']; $joinDate= $row[0]['joining_date'];

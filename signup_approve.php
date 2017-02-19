@@ -244,8 +244,8 @@ if ($_SESSION["nub-admin-login-check"] != "yes") {
 	/*-- connect to database --*/
 	require 'connect_database.php';
 
-	$sql = "SELECT user_id, name, department, batch, joining_date, profession FROM verify_sign_up WHERE status= 'unverified'";
-	$result = $conn->query($sql);
+	/*--   get unverified signup list from database   --*/
+	
 
 	if ($result->num_rows > 0) {
 	    // output data of each row
