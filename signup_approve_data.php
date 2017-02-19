@@ -23,8 +23,10 @@
       $sqlGet = "SELECT * FROM verify_sign_up WHERE user_id= '$insert[0]' AND status='verified'";
       $result= $conn->query($sqlGet);
       $row = mysqli_fetch_all($result,MYSQLI_ASSOC);
-      $id= $insert[0]; $name= $row[0]['name']; $department= $row[0]['department']; $batch= $row[0]['batch']; $joinDate= $row[0]['joining_date'];
-      $contact= $row[0]['contact']; $email= $row[0]['email']; $password= $row[0]['password']; $address= $row[0]['address']; $gender= $row[0]['gender']; $profession= $row[0]['profession'];
+      
+      $id= $insert[0]; $name= $row[0]['name']; $department= $row[0]['department']; $batch= $row[0]['batch'];
+      $joinDate= $row[0]['joining_date']; $contact= $row[0]['contact']; $email= $row[0]['email']; $password= $row[0]['password'];
+      $address= $row[0]['address']; $gender= $row[0]['gender']; $profession= $row[0]['profession'];
 
       /*--   generate table & transfer data, for sutent id after verified   --*/
       if($insert[2] === 'student'){

@@ -227,13 +227,15 @@ if(month > 8){
 			while($rowCourses = $resultCourses->fetch_assoc()) {
 
 				/*-- copy offered courses from array to vaiable to use them in javascript --*/
-				$ocId= $rowCourses['c_id']; $ocName= $rowCourses['c_name']; $ocCredit= $rowCourses['c_credit']; $osection= $rowCourses['section'];
+				$ocId= $rowCourses['c_id']; $ocName= $rowCourses['c_name'];
+				$ocCredit= $rowCourses['c_credit']; $osection= $rowCourses['section'];
 				/*-- add options to dropdownbox --*/
 				echo "<script>
 								/*-- add options to dropdown-box --*/
 								var selectAddCourses= document.getElementById('dropdown-option-add');
 								var option1= document.createElement('option');
-								option1.text= 'Code: '+'[$ocId] >>'+'Course name: '+'[$ocName] >>'+'Credit: '+'[$ocCredit] >>'+'Section: '+'[$osection]';
+								option1.text= 'Code: '+'[$ocId] >>'+'Course name: '+'[$ocName] >>'+'Credit: '+
+																'[$ocCredit] >>'+'Section: '+'[$osection]';
 								selectAddCourses.add(option1);
 							</script>";
 			}
@@ -254,7 +256,8 @@ if(month > 8){
 								/*-- add options to dropdown-box --*/
 								var selectDropCourses= document.getElementById('dropdown-option-drop');
 								var option2= document.createElement('option');
-								option2.text= 'Code: '+'[$ocId] >>'+'Course name: '+'[$ocName] >>'+'Credit: '+'[$ocCredit] >>'+'Section: '+'[$osection]';
+								option2.text= 'Code: '+'[$ocId] >>'+'Course name: '+'[$ocName] >>'+'Credit: '+'[$ocCredit] >>'+
+																'Section: '+'[$osection]';
 								selectDropCourses.add(option2);
 							</script>";
 			}
