@@ -220,7 +220,7 @@ if ($_SESSION["nub-login-check"] != "yes") {
 	$student = $_SESSION["nub-login-id"];
 
 	/*--   get total completed credit hours from database   --*/
-	
+	require 'fetch_all.php';
 
 	if ($resultComCourse->num_rows > 0) {
 			$totalCompCredit= 0;
