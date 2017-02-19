@@ -252,15 +252,10 @@ if ($_SESSION["nub-login-check"] != "yes" && $_SESSION["nub-admin-login-check"] 
 				</script>";
 
 	/*--   get image path from database & display image   --*/
-	$sql= "SELECT image_path FROM profile WHERE user_id= '$student'";
-	$result= $conn->query($sql);
-
-	if ($result->num_rows > 0) {
-		$row= $result->fetch_assoc();
-		$path= $row['image_path'];
-		if($row){
+	if ($resultProfile->num_rows > 0) {
+		if($rowProfile){
 			echo "<script>
-							document.getElementById('image').src= '$path';
+							document.getElementById('image').src= '$image_path';
 						</script>";
 		}
 	}
