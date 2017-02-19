@@ -232,20 +232,12 @@ if ($_SESSION["nub-login-check"] != "yes") {
 	require 'connect_database.php';
 
 	/*--   get timeline of result publish from database   --*/
-  
+  require 'fetch_all.php';
 
-  if ($resultDate->num_rows > 0) {
-    /*-- output data of each row --*/
-    while($row = $resultDate->fetch_assoc()) {
-
-      /*-- copy registered courses from array to varriable to use them is javascript --*/
-      $resultPublish= $row['result_publish']; $regSemester= $row['reg_semester'];
-    }
-  }
 	/*--   calculate semester   --*/
-  if(date("Y-m-d") > $resultPublish){
-    $semName= $regSemester;
-  }else if (date("Y-m-d") <= $resultPublish) {
+  if(date("Y-m-d") > $result_publish){
+    $semName= $timeline_sem;
+  }else if (date("Y-m-d") <= $result_publish) {
     if(date("m") == 1){
       $year= date("Y")-1;
       $semName= "Fall " . $year;
