@@ -220,8 +220,7 @@ if ($_SESSION["nub-login-check"] != "yes") {
 	$student = $_SESSION["nub-login-id"];
 
 	/*--   get total completed credit hours from database   --*/
-	$sqlComCourse = "SELECT c_credit FROM ".$student." WHERE g_point != 'X' AND g_point != 'F'";
-	$resultComCourse = $conn->query($sqlComCourse);
+	
 
 	if ($resultComCourse->num_rows > 0) {
 			$totalCompCredit= 0;
