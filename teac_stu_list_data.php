@@ -18,7 +18,7 @@
   /*--   get "t_name" from teachers database   --*/
   require 'fetch_all.php';
 
-  /*--   get student t_id and c_id from teachers registered courses from database   --*/
+  /*--   check authority of teacher to access course   --*/
   $author= 0;
 
   if ($resultTeacReg->num_rows > 0) {
@@ -29,6 +29,7 @@
     }
   }
 
+  /*--   if teacher is allowed to access, get student list of that course   --*/
   if($author == 1){
     /*--   get student id from registered courses from database   --*/
     $sqlRegCourses = "SELECT s_id FROM reg_semester WHERE status= 'reg' AND c_id= '$q' AND g_point IS NULL";
