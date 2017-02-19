@@ -232,8 +232,7 @@ if ($_SESSION["nub-login-check"] != "yes") {
 	require 'connect_database.php';
 
 	/*--   get timeline of result publish from database   --*/
-  $sqlDate = "SELECT result_publish, reg_semester FROM timeline";
-  $resultDate = $conn->query($sqlDate);
+  
 
   if ($resultDate->num_rows > 0) {
     /*-- output data of each row --*/
