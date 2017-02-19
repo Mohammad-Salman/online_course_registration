@@ -223,22 +223,16 @@ if ($_SESSION["nub-admin-login-check"] != "yes") {
 	/*--   get timeline from database   --*/
 	require 'fetch_all.php';
 
-	if ($resultDate->num_rows > 0) {
-		/*-- output data of each row --*/
-		while($row = $resultDate->fetch_assoc()) {
-
-			/*-- copy registered courses from array to varriable to use them is javascript --*/
-			$start= $row['reg_start']; $end= $row['reg_end']; $resultPublish= $row['result_publish'];
-			$semester= $row['reg_semester']; $regConfirm= $row['reg_confirm'];
+	if ($resultTimeline->num_rows > 0) {
+		/*-- display timeline --*/
 
 			echo "<script>
-							document.getElementById('reg-semester').innerHTML= '$semester';
-							document.getElementById('start-text').innerHTML= '$start';
-							document.getElementById('end-text').innerHTML= '$end';
-							document.getElementById('confirm-text').innerHTML= '$regConfirm';
-							document.getElementById('result-date-text').innerHTML= '$resultPublish';
+							document.getElementById('reg-semester').innerHTML= '$timeline_sem';
+							document.getElementById('start-text').innerHTML= '$reg_start';
+							document.getElementById('end-text').innerHTML= '$reg_end';
+							document.getElementById('confirm-text').innerHTML= '$reg_confirm_date';
+							document.getElementById('result-date-text').innerHTML= '$result_publish';
 						</script>";
-		}
 	}
 
 	$conn->close();
